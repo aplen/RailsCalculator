@@ -9,7 +9,7 @@ public class Cut {
     }
 
     public void setRailLength(double railLength) throws IllegalArgumentException {
-	if (railLength < 0) {
+	if (railLength <= 0) {
 	    throw new IllegalArgumentException();
 	} else {
 	    this.railLength = railLength;
@@ -17,7 +17,7 @@ public class Cut {
 
     }
     public void setSegmentLength(double segmentLength) throws IllegalArgumentException {
-	if (segmentLength < 0) {
+	if (segmentLength <= 0) {
 	    throw new IllegalArgumentException();
 	} else {
 	    this.segmentLength = segmentLength;
@@ -29,7 +29,7 @@ public class Cut {
     }
 
     public void setSegmentCount(double segmentCount) throws IllegalArgumentException {
-	if (segmentCount < 0) {
+	if (segmentCount <= 0) {
 	    throw new IllegalArgumentException();
 	} else {
 	    
@@ -42,7 +42,7 @@ public class Cut {
     }
 
     public void setSawWidth(double sawWidth) throws IllegalArgumentException {
-	if (sawWidth < 0) {
+	if (sawWidth <= 0) {
 	    throw new IllegalArgumentException();
 	} else {
 	    this.sawWidth = sawWidth;

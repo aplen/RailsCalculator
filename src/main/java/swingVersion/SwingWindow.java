@@ -20,7 +20,7 @@ public class SwingWindow extends JFrame implements FocusListener {
 
     SwingWindow() {// konstruktor okna
         super("Kalkulator zużycia szyn trapezowych SMT-60 ");
-        setBounds(200, 10, 640, 480);
+        setBounds(200, 10, 700, 480);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         title = new JLabel("Wprowadź dane:");
         //title1 = new JLabel("tytul1");
@@ -63,8 +63,7 @@ public class SwingWindow extends JFrame implements FocusListener {
             if (source == solveButton) {
 
                 parseData();
-                railsCutter.oblicz(cut);
-                solutionDesc.setText(railsCutter.getAnswer());
+                solutionDesc.setText(railsCutter.returnAnswer());
                 title.setText("Wykonano obliczenia. Wprowadz nowe dane:");
             }
             if (source == exitButton) {
