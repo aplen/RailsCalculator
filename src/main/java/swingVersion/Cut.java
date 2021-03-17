@@ -8,46 +8,19 @@ public class Cut {
 	return railLength;
     }
 
-    public void setRailLength(double railLength) throws IllegalArgumentException {
-	if (railLength <= 0) {
-	    throw new IllegalArgumentException();
-	} else {
-	    this.railLength = railLength;
-	}
 
-    }
-    public void setSegmentLength(double segmentLength) throws IllegalArgumentException {
-	if (segmentLength <= 0) {
-	    throw new IllegalArgumentException();
-	} else {
-	    this.segmentLength = segmentLength;
-	}
-    }
 
     public double getSegmentCount() {
 	return segmentCount;
     }
 
-    public void setSegmentCount(double segmentCount) throws IllegalArgumentException {
-	if (segmentCount <= 0) {
-	    throw new IllegalArgumentException();
-	} else {
-	    
-		this.segmentCount = segmentCount;
-	}
-    }
+
+
 
     public double getSawWidth() {
 	return (sawWidth);
     }
 
-    public void setSawWidth(double sawWidth) throws IllegalArgumentException {
-	if (sawWidth <= 0) {
-	    throw new IllegalArgumentException();
-	} else {
-	    this.sawWidth = sawWidth;
-	}
-    }
 
     @Override
     public String toString() {
@@ -64,6 +37,22 @@ public class Cut {
 	b.append(" długość ciętego odcinka\n");
 	return b.substring(0);
     }
+
+	void setRailLength(double railLength) {
+		this.railLength = railLength;
+	}
+
+	void setSegmentLength(double segmentLength) {
+		this.segmentLength = segmentLength;
+	}
+
+	void setSegmentCount(double segmentCount) {
+		this.segmentCount = segmentCount;
+	}
+
+	void setSawWidth(double sawWidth) {
+		this.sawWidth = sawWidth;
+	}
 
 	public double getSegmentLength() {
 		return segmentLength;

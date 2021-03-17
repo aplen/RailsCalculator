@@ -9,7 +9,7 @@ public class RailsCutter {
         this.cut = cut;
     }
 
-    private double segmentsPerOneRail;
+    private int segmentsPerOneRail;
     private double wastedSegmentOfRailRemain;
     private double wastedSegmentOfLastRailRemain;
     private double sawDustFromLastRail;
@@ -19,7 +19,7 @@ public class RailsCutter {
     private double wasteInCentimeters;
     private double sawDustFromOneRail;
     private double segmentsPerLastRail;
-    private double counter;
+    private int counter;
 
     private double round(double rounded) {
         return Math.round((rounded) * 100) / 100.0;
@@ -33,9 +33,9 @@ public class RailsCutter {
         return round(cut.getSegmentLength() * 2.0 * cut.getSegmentCount() / 100.00);
     }
 
-    private boolean isSegmentShorterThanRailAndNoZeroValues() {
+    public boolean isSegmentShorterThanRailAndNoZeroValues() {
 
-        if (cut.getSegmentLength() < cut.getRailLength()&&cut.getRailLength()>0.00&&cut.getSegmentLength()>0.00&&cut.getSawWidth()>0.00&&cut.getSegmentCount()>0.00) {
+        if (cut.getSegmentLength() < cut.getRailLength() && cut.getRailLength() > 0.00 && cut.getSegmentLength() > 0.00 && cut.getSawWidth() > 0.00 && cut.getSegmentCount() > 0.00) {
             return true;
         } else
             return false;
@@ -43,23 +43,21 @@ public class RailsCutter {
     }
 
     private double wastedSegmentOfRailRemainCount() {
-        counter = 0.0;
-        sawDustFromOneRail=0.0;
+        counter = 0;
+        sawDustFromOneRail = 0.0;
         wastedSegmentOfRailRemain = cut.getRailLength();
 
-        if (isSegmentShorterThanRailAndNoZeroValues())
+        do {
 
-            do {
+            wastedSegmentOfRailRemain = round(wastedSegmentOfRailRemain - cut.getSegmentLength() - cut.getSawWidth());
+            counter++;
 
-                wastedSegmentOfRailRemain = round(wastedSegmentOfRailRemain - cut.getSegmentLength() - cut.getSawWidth());
-                counter++;
+            if (wastedSegmentOfRailRemain != 0.0
+            ) {
+                sawDustFromOneRail = sawDustFromOneRail + cut.getSawWidth();
+            }
 
-                if (wastedSegmentOfRailRemain != 0.0
-                ) {
-                    sawDustFromOneRail = sawDustFromOneRail + cut.getSawWidth();
-                }
-
-            } while (wastedSegmentOfRailRemain >= cut.getSegmentLength());
+        } while (wastedSegmentOfRailRemain >= cut.getSegmentLength());
 
         return wastedSegmentOfRailRemain;
     }
@@ -115,18 +113,48 @@ public class RailsCutter {
 
 
     public String returnAnswer() {
-wastedSegmentOfRailRemainCount();
-segmentsPerOneRailCount();
-segmentsPerLastRailCount();
-sawDustFromLastRailCount();
-wastedSegmentsOfLastRailRemainCount();
-wasteInCentimetersCount();
-sawDustInCentimetersCount();
-railsUsagePerSegmentsInCentimetersCount();
-railsUsageCount();
+        wastedSegmentOfRailRemainCount();
+        segmentsPerOneRailCount();
+        segmentsPerLastRailCount();
+        sawDustFromLastRailCount();
+        wastedSegmentsOfLastRailRemainCount();
+        wasteInCentimetersCount();
+        sawDustInCentimetersCount();
+        railsUsagePerSegmentsInCentimetersCount();
+        railsUsageCount();
 
-        String answer = cut.getSegmentCount() + " szt. odcinków o długości " + cut.getSegmentLength() + " cm, Szerokość ostrza piły " + cut.getSawWidth() + " cm," + " odcinki na szyne " + segmentsPerOneRail + "\nodpad z szyny " + wastedSegmentOfRailRemain + "\nodpad z ostatniej szyny " + wastedSegmentOfLastRailRemain + "\nwiór z ostatniej szyny " + sawDustFromLastRail + "\nzuzycie szyn w szt " + railsUsage + "\nzużycie szyn w cm " + railsUsagePerSegmentsInCentimeters + "\nwiór w cm " + sawDustInCentimeters + "\nodpad w cm " + wasteInCentimeters + "\nilość blachowkrętów: " + screwsNrCount() + "\ndługość EPDM w m: " + epdmCount();
-        System.out.println(answer);
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Długość szyny ");
+        builder.append(cut.getRailLength());
+        builder.append("cm, ");
+        builder.append(cut.getSegmentCount());
+        builder.append(" szt. odcinków o długości ");
+        builder.append(cut.getSegmentLength());
+        builder.append(" cm, Szerokość ostrza piły ");
+        builder.append(cut.getSawWidth());
+        builder.append("cm,  odcinki na szyne ");
+        builder.append(segmentsPerOneRail);
+        builder.append("\nodpad z szyny ");
+        builder.append(wastedSegmentOfRailRemain);
+        builder.append(", odpad z ostatniej szyny ");
+        builder.append(wastedSegmentOfLastRailRemain);
+        builder.append(", wiór z ostatniej szyny ");
+        builder.append(sawDustFromLastRail);
+        builder.append("\n zużycie szyn w szt ");
+        builder.append(railsUsage);
+        builder.append(", zużycie szyn ");
+        builder.append(railsUsagePerSegmentsInCentimeters);
+        builder.append("cm, wiór ");
+        builder.append(sawDustInCentimeters);
+        builder.append("cm, odpad");
+        builder.append(wasteInCentimeters);
+        builder.append("cm,\nilość blachowkrętów: ");
+        builder.append(screwsNrCount());
+        builder.append(", długość EPDM w metrach: ");
+        builder.append(epdmCount());
+
+        String answer = builder.substring(0);
         return answer;
 
     }
