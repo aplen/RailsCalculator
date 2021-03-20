@@ -14,7 +14,7 @@ public class RailsCutter {
     private double wastedSegmentOfLastRailRemain;
     private double sawDustFromLastRail;
     private double railsUsage;
-    private double railsUsagePerSegmentsInCentimeters;
+    private double totalRailsUsageInMeters;
     private double sawDustInCentimeters;
     private double wasteInCentimeters;
     private double sawDustFromOneRail;
@@ -100,13 +100,13 @@ public class RailsCutter {
         return sawDustInCentimeters;
     }
 
-    private double railsUsagePerSegmentsInCentimetersCount() {
-        railsUsagePerSegmentsInCentimeters = round(cut.getSegmentCount() * cut.getSegmentLength() + wasteInCentimeters + sawDustInCentimeters);
-        return railsUsagePerSegmentsInCentimeters;
+    private double totalRailsUsageInMetersCount() {
+        totalRailsUsageInMeters = round((cut.getSegmentCount() * cut.getSegmentLength() + wasteInCentimeters + sawDustInCentimeters)/100.00);
+        return totalRailsUsageInMeters;
     }
 
     private double railsUsageCount() {
-        railsUsage = round(railsUsagePerSegmentsInCentimeters / cut.getRailLength());
+        railsUsage = round((totalRailsUsageInMeters*100.00) / cut.getRailLength());
 
         return railsUsage;
     }
@@ -120,40 +120,34 @@ public class RailsCutter {
         wastedSegmentsOfLastRailRemainCount();
         wasteInCentimetersCount();
         sawDustInCentimetersCount();
-        railsUsagePerSegmentsInCentimetersCount();
+        totalRailsUsageInMetersCount();
         railsUsageCount();
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Długość szyny ");
-        builder.append(cut.getRailLength());
-        builder.append("cm, ");
-        builder.append(cut.getSegmentCount());
-        builder.append(" szt. odcinków o długości ");
-        builder.append(cut.getSegmentLength());
-        builder.append(" cm, Szerokość ostrza piły ");
-        builder.append(cut.getSawWidth());
-        builder.append("cm,  odcinki na szyne ");
-        builder.append(segmentsPerOneRail);
-        builder.append("\nodpad z szyny ");
-        builder.append(wastedSegmentOfRailRemain);
-        builder.append(", odpad z ostatniej szyny ");
-        builder.append(wastedSegmentOfLastRailRemain);
-        builder.append(", wiór z ostatniej szyny ");
-        builder.append(sawDustFromLastRail);
-        builder.append("\n zużycie szyn w szt ");
-        builder.append(railsUsage);
-        builder.append(", zużycie szyn ");
-        builder.append(railsUsagePerSegmentsInCentimeters);
-        builder.append("cm, wiór ");
-        builder.append(sawDustInCentimeters);
-        builder.append("cm, odpad");
-        builder.append(wasteInCentimeters);
-        builder.append("cm,\nilość blachowkrętów: ");
-        builder.append(screwsNrCount());
-        builder.append(", długość EPDM w metrach: ");
-        builder.append(epdmCount());
 
+        //builder.append(", wiór z ostatniej szyny ");
+        //builder.append(sawDustFromLastRail);
+        builder.append("Zużycie szyn: ");
+        builder.append(railsUsage);
+        builder.append("szt., długość zużytych szyn ");
+        builder.append(totalRailsUsageInMeters);
+        builder.append("m.,\nBlachowkręty (6szt. na odcinek): ");
+        builder.append(screwsNrCount());
+        builder.append("szt., długość EPDM: ");
+        builder.append(epdmCount());
+        builder.append("m.");
+        builder.append("\nIlość odcinków z jednej szyny: ");
+        builder.append(segmentsPerOneRail);
+        builder.append("szt., odpad po pocięciu jednej szyny ");
+        builder.append(wastedSegmentOfRailRemain);
+        builder.append("cm.,\nOdpad łącznie bez odcinka z ostatniej szyny ");
+        builder.append(wasteInCentimeters);
+        builder.append("cm., straty z wiórów: ");
+        builder.append(sawDustInCentimeters);
+        builder.append("cm.,\n odcinek z ostatniej szyny ");
+        builder.append(wastedSegmentOfLastRailRemain);
+        builder.append("cm.");
         String answer = builder.substring(0);
         return answer;
 

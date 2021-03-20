@@ -8,31 +8,12 @@
     <artifactId>KalkulatorSolarspot</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-<dependencies>
-    <!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
-    <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>10.14.2.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.derby/derbyclient -->
-    <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derbyclient</artifactId>
-        <version>10.14.2.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.derby/derbynet -->
-    <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derbynet</artifactId>
-        <version>10.14.2.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.derby/derbyLocale_pl -->
-    <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derbyLocale_pl</artifactId>
-        <version>10.14.2.0</version>
-    </dependency>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencies>
     <!-- https://mvnrepository.com/artifact/junit/junit -->
     <dependency>
         <groupId>junit</groupId>
@@ -49,6 +30,19 @@
             <version>3.8.1</version>
             <configuration>
                 <release>11</release>
+            </configuration>
+        </plugin>
+        <plugin>
+            <version>3.1.2</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>swingVersion.Main</mainClass>
+                    </manifest>
+                </archive>
             </configuration>
         </plugin>
     </plugins>

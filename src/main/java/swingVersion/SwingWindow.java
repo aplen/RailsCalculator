@@ -2,10 +2,7 @@ package swingVersion;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 
 
 public class SwingWindow extends JFrame implements FocusListener {
@@ -19,38 +16,68 @@ public class SwingWindow extends JFrame implements FocusListener {
     private JPanel titlePart, centerPart, bottomPart;
 
     SwingWindow() {// konstruktor okna
-        super("Kalkulator zużycia szyn trapezowych SMT-60 ");
+        super("SOLARSPOT - Kalkulator odcinków szyn");
         setBounds(200, 10, 700, 600);
+
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         title = new JLabel("Wprowadź dane:");
 
         jRailLength = new JTextField("300.00", 10);
         jRailLengthDesc = new JLabel("Długość szyny w cm:");
 
-        jSawWidth = new JTextField("0.2", 10);
+        jSawWidth = new JTextField("0.20", 10);
         jSawWidthDesc = new JLabel("Grubość ostrza piły w cm:");
 
-        jSegmentLength = new JTextField("0", 10);
+        jSegmentLength = new JTextField("", 10);
         jSegmentLengthDesc = new JLabel("Długość odcinka w cm:");
 
-        jSegmentCount = new JTextField("0", 10);
+        jSegmentCount = new JTextField("", 10);
         jSegmentCountDesc = new JLabel("Ilość potrzebnych odcinków:");
-
         JTextArea solutionDesc = new JTextArea("Wynik:", 10, 2);
         solutionDesc.setEditable(false);
         solutionDesc.setOpaque(false);
 
 
-        solveButton = new JButton("Oblicz");
+        solveButton = new JButton("Oblicz (ENTER)");
         solveButton.setPreferredSize(new Dimension(50, 20));
-        exitButton = new JButton("Wyjście");
+        exitButton = new JButton("Wyjście (ESC)");
         exitButton.setPreferredSize(new Dimension(50, 20));
-        // jAnswer.setEditable(false);
 
-        jRailLength.addFocusListener(this); // tworzenie reakcji na klikanie oraz aktywację/deaktywację pól
+        jRailLength.addFocusListener(this);
         jSegmentLength.addFocusListener(this);
         jSegmentCount.addFocusListener(this);
         jSawWidth.addFocusListener(this);
+
+        jSegmentLength.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
+                }
+            }
+        });
+
+        jSegmentCount.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
+                }
+            }
+        });
+        jRailLength.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
+                }
+            }
+        });
+        jSawWidth.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(0);
+                }
+            }
+        });
         ActionListener listen = (ActionEvent e) -> {
             Object source = e.getSource();
             if (source == solveButton) {
@@ -58,7 +85,7 @@ public class SwingWindow extends JFrame implements FocusListener {
                 parseData();
                 if (railsCutter.isSegmentShorterThanRailAndNoZeroValues()) {
                     solutionDesc.setText(railsCutter.returnAnswer());
-                    title.setText("Wykonano obliczenia. Wprowadz nowe dane:");
+                    title.setText("Wykonano obliczenia. Wprowadź nowe dane:");
                 } else {
                     title.setText("Wprowadzone dane są błędne");
 
@@ -72,6 +99,7 @@ public class SwingWindow extends JFrame implements FocusListener {
         };
         solveButton.addActionListener(listen);
         exitButton.addActionListener(listen);
+
 
         titlePart = new JPanel(); // rozmieszcznie elementów w trzech grupach w okreslonej kolejności
         //titlePart.add(title1);
@@ -97,13 +125,14 @@ public class SwingWindow extends JFrame implements FocusListener {
         bottomPart.add(textWithScroll);
         bottomPart.add(exitButton);
 
+        this.getRootPane().setDefaultButton(solveButton);
+
         setLayout(new BorderLayout(5, 5));
         add(titlePart, BorderLayout.NORTH);
         add(centerPart, BorderLayout.CENTER);
         centerPart.setPreferredSize(new Dimension(100, 100));
         add(bottomPart, BorderLayout.SOUTH);
         bottomPart.setPreferredSize(new Dimension(100, 300));
-
         setVisible(true);
     }
 
@@ -145,7 +174,7 @@ public class SwingWindow extends JFrame implements FocusListener {
 
     @Override
     public Insets getInsets() {// ramka okna
-        return new Insets(40, 20, 20, 20);
+        return new Insets(30, 15, 15, 15);
     }
 
     @Override
@@ -156,5 +185,7 @@ public class SwingWindow extends JFrame implements FocusListener {
     public void focusLost(FocusEvent e1e) {// reakcja na wyjscie z elementu
         //parseData();
     }
+
+
 
 }
