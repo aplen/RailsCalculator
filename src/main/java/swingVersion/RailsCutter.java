@@ -35,7 +35,7 @@ public class RailsCutter {
 
     public boolean isSegmentShorterThanRailAndNoZeroValues() {
 
-        if (cut.getSegmentLength() < cut.getRailLength() && cut.getRailLength() > 0.00 && cut.getSegmentLength() > 0.00 && cut.getSawWidth() > 0.00 && cut.getSegmentCount() > 0.00) {
+        if (cut.getSegmentLength() < cut.getRailLength() && cut.getRailLength() > 0.00 && cut.getSegmentLength() > 0.00 && cut.getSawWidth() >= 0.00 && cut.getSegmentCount() > 0.00) {
             return true;
         } else
             return false;
