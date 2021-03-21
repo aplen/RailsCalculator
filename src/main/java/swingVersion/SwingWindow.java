@@ -27,7 +27,7 @@ public class SwingWindow extends JFrame implements FocusListener {
         jRailLengthDesc = new JLabel("Długość szyny w cm:");
 
         jSawWidth = new JTextField("0.20", 10);
-        jSawWidthDesc = new JLabel("Grubość ostrza piły w cm:");
+        jSawWidthDesc = new JLabel("Szerokość ostrza piły w cm:");
 
         jSegmentLength = new JTextField("", 10);
         jSegmentLengthDesc = new JLabel("Długość odcinka w cm:");
@@ -41,7 +41,7 @@ public class SwingWindow extends JFrame implements FocusListener {
 
         solveButton = new JButton("Oblicz (ENTER)");
         solveButton.setPreferredSize(new Dimension(50, 20));
-        exitButton = new JButton("Wyjście (ESC)");
+        exitButton = new JButton("Wyjście (X)");
         exitButton.setPreferredSize(new Dimension(50, 20));
 
         jRailLength.addFocusListener(this);
@@ -51,30 +51,42 @@ public class SwingWindow extends JFrame implements FocusListener {
 
         jSegmentLength.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (ke.getKeyCode() == KeyEvent.VK_X) {
                     System.exit(0);
+                }
+                if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    jSegmentLength.setText("");
                 }
             }
         });
 
         jSegmentCount.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (ke.getKeyCode() == KeyEvent.VK_X) {
                     System.exit(0);
+                }
+                if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    jSegmentCount.setText("");
                 }
             }
         });
         jRailLength.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (ke.getKeyCode() == KeyEvent.VK_X) {
                     System.exit(0);
+                }
+                if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    jRailLength.setText("");
                 }
             }
         });
         jSawWidth.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (ke.getKeyCode() == KeyEvent.VK_X) {
                     System.exit(0);
+                }
+                if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    jSawWidth.setText("");
                 }
             }
         });
@@ -185,7 +197,6 @@ public class SwingWindow extends JFrame implements FocusListener {
     public void focusLost(FocusEvent e1e) {// reakcja na wyjscie z elementu
         //parseData();
     }
-
 
 
 }

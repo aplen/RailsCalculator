@@ -139,13 +139,13 @@ public class RailsCutter {
         builder.append("m.");
         builder.append("\nIlość odcinków z jednej szyny: ");
         builder.append(segmentsPerOneRail);
-        builder.append("szt., odpad po pocięciu jednej szyny ");
+        builder.append("szt., odpad z jednej szyny ");
         builder.append(wastedSegmentOfRailRemain);
         builder.append("cm.,\nOdpad łącznie bez odcinka z ostatniej szyny ");
         builder.append(wasteInCentimeters);
         builder.append("cm., straty z wiórów: ");
         builder.append(sawDustInCentimeters);
-        builder.append("cm.,\n odcinek z ostatniej szyny ");
+        builder.append("cm.,\n + odcinek nadający się do wykorzystania ");
         builder.append(wastedSegmentOfLastRailRemain);
         builder.append("cm.");
         String answer = builder.substring(0);
