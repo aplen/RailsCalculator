@@ -126,8 +126,6 @@ public class RailsCutter {
         StringBuilder builder = new StringBuilder();
 
 
-        //builder.append(", wiór z ostatniej szyny ");
-        //builder.append(sawDustFromLastRail);
         builder.append("Zużycie szyn: ");
         builder.append(railsUsage);
         builder.append("szt., długość zużytych szyn ");
