@@ -1,6 +1,15 @@
 package swingVersion;
 
 public class Cut {
+    public Cut() {
+    }
+
+    public Cut(double railLength, double segmentLength, double segmentCount, double sawWidth) {
+        this.railLength = railLength;
+        this.segmentLength = segmentLength;
+        this.segmentCount = segmentCount;
+        this.sawWidth = sawWidth;
+    }
 
     private double railLength, segmentLength, segmentCount, sawWidth;
 
