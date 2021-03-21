@@ -54,10 +54,10 @@ public class RailsCutter {
 
             if (wastedSegmentOfRailRemain != 0.0
             ) {
-                sawDustFromOneRail = sawDustFromOneRail + cut.getSawWidth();
+                sawDustFromOneRail = round(sawDustFromOneRail + cut.getSawWidth());
             }
 
-        } while (wastedSegmentOfRailRemain >= cut.getSegmentLength());
+        } while (wastedSegmentOfRailRemain-cut.getSawWidth() >= cut.getSegmentLength());
 
         return wastedSegmentOfRailRemain;
     }
@@ -141,7 +141,7 @@ public class RailsCutter {
         builder.append(segmentsPerOneRail);
         builder.append("szt., odpad z jednej szyny ");
         builder.append(wastedSegmentOfRailRemain);
-        builder.append("cm.,\nOdpad łącznie bez odcinka z ostatniej szyny ");
+        builder.append("cm.,\nOdpad łącznie ");
         builder.append(wasteInCentimeters);
         builder.append("cm., straty z wiórów: ");
         builder.append(sawDustInCentimeters);

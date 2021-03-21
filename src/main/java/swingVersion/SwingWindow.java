@@ -99,7 +99,7 @@ public class SwingWindow extends JFrame implements FocusListener {
                     solutionDesc.setText(railsCutter.returnAnswer());
                     title.setText("Wykonano obliczenia. Wprowadź nowe dane:");
                 } else {
-                    title.setText("Wprowadzone dane są błędne");
+                    title.setText("Wprowadzone dane są błędne!");
 
                 }
 
