@@ -35,14 +35,11 @@ public class RailsCutter {
 
     public boolean isSegmentShorterThanRailAndNoZeroValues() {
 
-        if (cut.getSegmentLength() < cut.getRailLength() && cut.getRailLength() > 0.00 && cut.getSegmentLength() > 0.00 && cut.getSawWidth() >= 0.00 && cut.getSegmentCount() > 0.00) {
-            return true;
-        } else
-            return false;
+        return cut.getSegmentLength() < cut.getRailLength() && cut.getRailLength() > 0.00 && cut.getSegmentLength() > 0.00 && cut.getSawWidth() >= 0.00 && cut.getSegmentCount() > 0.00;
 
     }
 
-    private double wastedSegmentOfRailRemainCount() {
+    private void wastedSegmentOfRailRemainCount() {
         counter = 0;
         sawDustFromOneRail = 0.0;
         wastedSegmentOfRailRemain = cut.getRailLength();
@@ -59,56 +56,47 @@ public class RailsCutter {
 
         } while (wastedSegmentOfRailRemain-cut.getSawWidth() >= cut.getSegmentLength());
 
-        return wastedSegmentOfRailRemain;
     }
 
-    private double segmentsPerOneRailCount() {
+    private void segmentsPerOneRailCount() {
         segmentsPerOneRail = counter;
-        return segmentsPerOneRail;
     }
 
-    private double segmentsPerLastRailCount() {
+    private void segmentsPerLastRailCount() {
         segmentsPerLastRail = cut.getSegmentCount() % segmentsPerOneRail;
-        return segmentsPerLastRail;
     }
 
-    private double sawDustFromLastRailCount() {
+    private void sawDustFromLastRailCount() {
         sawDustFromLastRail = 0.00;
         if (segmentsPerLastRail != 0.0) {
             sawDustFromLastRail = round(segmentsPerLastRail * cut.getSawWidth());
         }
-        return sawDustFromLastRail;
     }
 
-    private double wastedSegmentsOfLastRailRemainCount() {
+    private void wastedSegmentsOfLastRailRemainCount() {
         wastedSegmentOfLastRailRemain = 0.0;
         if (segmentsPerLastRail != 0.0) {
 
             wastedSegmentOfLastRailRemain = round(cut.getRailLength() - (segmentsPerLastRail * cut.getSegmentLength()) - sawDustFromLastRail);
         }
 
-        return wastedSegmentOfLastRailRemain;
     }
 
-    private double wasteInCentimetersCount() {
+    private void wasteInCentimetersCount() {
         wasteInCentimeters = round(wastedSegmentOfRailRemain * Math.floor(cut.getSegmentCount() / segmentsPerOneRail));
-        return wasteInCentimeters;
     }
 
-    private double sawDustInCentimetersCount() {
+    private void sawDustInCentimetersCount() {
         sawDustInCentimeters = round(sawDustFromOneRail * Math.floor(cut.getSegmentCount() / segmentsPerOneRail) + sawDustFromLastRail);
-        return sawDustInCentimeters;
     }
 
-    private double totalRailsUsageInMetersCount() {
+    private void totalRailsUsageInMetersCount() {
         totalRailsUsageInMeters = round((cut.getSegmentCount() * cut.getSegmentLength() + wasteInCentimeters + sawDustInCentimeters)/100.00);
-        return totalRailsUsageInMeters;
     }
 
-    private double railsUsageCount() {
+    private void railsUsageCount() {
         railsUsage = round((totalRailsUsageInMeters*100.00) / cut.getRailLength());
 
-        return railsUsage;
     }
 
 
@@ -146,8 +134,7 @@ public class RailsCutter {
         builder.append("cm.,\n + odcinek nadający się do wykorzystania ");
         builder.append(wastedSegmentOfLastRailRemain);
         builder.append("cm.");
-        String answer = builder.substring(0);
-        return answer;
+        return builder.substring(0);
 
     }
 }

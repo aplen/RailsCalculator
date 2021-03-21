@@ -5,15 +5,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class SwingWindow extends JFrame implements FocusListener {
+class SwingWindow extends JFrame implements FocusListener {
 
     Cut cut = new Cut();
     RailsCutter railsCutter = new RailsCutter(cut);
 
-    private JTextField jRailLength, jSegmentLength, jSegmentCount, jSawWidth;
-    private JLabel title, jRailLengthDesc, jSegmentLengthDesc, jSegmentCountDesc, jSawWidthDesc;
-    private JButton solveButton, exitButton;
-    private JPanel titlePart, centerPart, bottomPart;
+    private final JTextField jRailLength, jSegmentLength, jSegmentCount, jSawWidth;
+    private final JLabel title;
+    private final JButton solveButton, exitButton;
 
     SwingWindow() {// konstruktor okna
         super("SOLARSPOT - Kalkulator odcinków szyn");
@@ -24,16 +23,16 @@ public class SwingWindow extends JFrame implements FocusListener {
         title = new JLabel("Wprowadź dane:");
 
         jRailLength = new JTextField("300.00", 10);
-        jRailLengthDesc = new JLabel("Długość szyny w cm:");
+        JLabel jRailLengthDesc = new JLabel("Długość szyny w cm:");
 
         jSawWidth = new JTextField("0.20", 10);
-        jSawWidthDesc = new JLabel("Szerokość ostrza piły w cm:");
+        JLabel jSawWidthDesc = new JLabel("Szerokość ostrza piły w cm:");
 
         jSegmentLength = new JTextField("", 10);
-        jSegmentLengthDesc = new JLabel("Długość odcinka w cm:");
+        JLabel jSegmentLengthDesc = new JLabel("Długość odcinka w cm:");
 
         jSegmentCount = new JTextField("", 10);
-        jSegmentCountDesc = new JLabel("Ilość potrzebnych odcinków:");
+        JLabel jSegmentCountDesc = new JLabel("Ilość potrzebnych odcinków:");
         JTextArea solutionDesc = new JTextArea("Wynik:", 10, 2);
         solutionDesc.setEditable(false);
         solutionDesc.setOpaque(false);
@@ -113,11 +112,11 @@ public class SwingWindow extends JFrame implements FocusListener {
         exitButton.addActionListener(listen);
 
 
-        titlePart = new JPanel(); // rozmieszcznie elementów w trzech grupach w okreslonej kolejności
+        JPanel titlePart = new JPanel(); // rozmieszcznie elementów w trzech grupach w okreslonej kolejności
         //titlePart.add(title1);
         titlePart.add(title);
 
-        centerPart = new JPanel();
+        JPanel centerPart = new JPanel();
         GridLayout centerGrid = new GridLayout(4, 2, 1, 10);
         centerPart.setLayout(centerGrid);
         centerPart.add(jRailLengthDesc);
@@ -129,7 +128,7 @@ public class SwingWindow extends JFrame implements FocusListener {
         centerPart.add(jSegmentLengthDesc);
         centerPart.add(jSegmentLength);
 
-        bottomPart = new JPanel();
+        JPanel bottomPart = new JPanel();
         GridLayout bottomGrid = new GridLayout(3, 1, 1, 10);
         bottomPart.setLayout(bottomGrid);
         bottomPart.add(solveButton);
