@@ -25,7 +25,7 @@ class SwingWindow extends JFrame implements FocusListener {
         jRailLength = new JTextField("300.00", 10);
         JLabel jRailLengthDesc = new JLabel("Długość szyny w cm:");
 
-        jSawWidth = new JTextField("0.20", 10);
+        jSawWidth = new JTextField("0.40", 10);
         JLabel jSawWidthDesc = new JLabel("Szerokość ostrza piły w cm:");
 
         jSegmentLength = new JTextField("", 10);
